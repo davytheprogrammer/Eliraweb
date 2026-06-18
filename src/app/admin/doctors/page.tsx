@@ -13,7 +13,10 @@ export default async function AdminDoctorsPage({
   const currentTab = resolvedParams.tab || "pending";
   
   const counts = await getExpertStatusCounts();
-  const doctors = await getExpertsByStatus(currentTab as any);
+  const rawDoctors = await getExpertsByStatus(currentTab as any);
+  
+  // Convert database row objects to plain JavaScript objects for the Client Component
+  const doctors = JSON.parse(JSON.stringify(rawDoctors));
 
   async function handleApprove(id: string) {
     "use server";
