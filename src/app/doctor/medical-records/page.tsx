@@ -14,7 +14,13 @@ export default async function MedicalRecordsPage({
   const newPatientId = resolvedParams.new;
 
   const token = (await cookies()).get("auth-token")?.value;
-  const userId = token?.replace("mock-token-", "");
+  let userId = token?.replace("mock-token-", "");
+  if (token?.startsWith("mock-jwt-")) {
+    try {
+      const decoded = JSON.parse(Buffer.from(token.replace("mock-jwt-", ""), "base64").toString("utf-8"));
+      userId = decoded.id;
+    } catch(e) {}
+  }
 
   if (!userId) redirect("/login");
 
@@ -26,7 +32,13 @@ export default async function MedicalRecordsPage({
   async function handleCreateRecord(formData: FormData) {
     "use server";
     const token = (await cookies()).get("auth-token")?.value;
-    const userId = token?.replace("mock-token-", "");
+    let userId = token?.replace("mock-token-", "");
+  if (token?.startsWith("mock-jwt-")) {
+    try {
+      const decoded = JSON.parse(Buffer.from(token.replace("mock-jwt-", ""), "base64").toString("utf-8"));
+      userId = decoded.id;
+    } catch(e) {}
+  }
     if (!userId) return;
     
     const doc = await getExpertByUserId(userId);
