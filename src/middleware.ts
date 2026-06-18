@@ -22,22 +22,38 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   const { pathname } = request.nextUrl;
 
+  // Public routes
   if (pathname.startsWith("/api")) return response;
 
-  if (pathname === "/login") {
-    if (user) return NextResponse.redirect(new URL("/doctor/dashboard", request.url));
+  // Allow signup and verification-pending without auth
+  if (pathname === "/signup" || pathname === "/verification-pending") {
+    return response;
+  }
+
+  if (pathname === "/" || pathname === "/login") {
+    if (user) {
+      const role = user.user_metadata?.role as string | undefined;
+      const isDoctor = role === 'DOCTOR' || role === 'GYNECOLOGIST';
+      const dest = role === "ADMIN" ? "/admin/dashboard" : "/doctor/dashboard";
+      return NextResponse.redirect(new URL(dest, request.url));
+    }
+    if (pathname === "/") {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
     return response;
   }
 
   if (!user) return NextResponse.redirect(new URL("/login", request.url));
 
   const role = user.user_metadata?.role as string | undefined;
+  const isDoctor = role === 'DOCTOR' || role === 'GYNECOLOGIST';
+  const isAdmin = role === 'ADMIN';
 
-  if (pathname.startsWith("/admin") && role !== "ADMIN") {
+  if (pathname.startsWith("/admin") && !isAdmin) {
     return NextResponse.redirect(new URL("/doctor/dashboard", request.url));
   }
 
-  if (pathname.startsWith("/doctor") && role !== "DOCTOR") {
+  if (pathname.startsWith("/doctor") && !isDoctor) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 
