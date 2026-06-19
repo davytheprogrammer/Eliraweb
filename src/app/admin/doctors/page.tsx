@@ -4,6 +4,7 @@ import { ExpandableDoctorCard } from "@/components/admin/ExpandableDoctorCard";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Users, FileSearch } from "lucide-react";
+import { AddSpecialistButtonWrapper } from "@/components/admin/AddSpecialistButtonWrapper";
 
 export default async function AdminDoctorsPage({
   searchParams,
@@ -62,6 +63,7 @@ export default async function AdminDoctorsPage({
           </h1>
           <p className="text-slate-500 mt-1">Review specialist applications and manage active accounts.</p>
         </div>
+        <AddSpecialistButtonWrapper />
       </div>
 
       {/* Tabs */}
