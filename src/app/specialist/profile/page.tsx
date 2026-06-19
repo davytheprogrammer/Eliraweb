@@ -40,7 +40,7 @@ export default async function ProfilePage() {
       years_of_experience: Number(formData.get("years_of_experience")),
     });
     
-    revalidatePath("/doctor/profile");
+    revalidatePath("/specialist/profile");
   }
 
   return (

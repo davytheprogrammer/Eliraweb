@@ -53,7 +53,7 @@ export default async function DoctorAppointmentsPage() {
       await AppointmentService.markNoShow(id);
     }
 
-    revalidatePath("/doctor/appointments");
+    revalidatePath("/specialist/appointments");
   }
 
   return (

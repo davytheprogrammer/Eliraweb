@@ -33,7 +33,7 @@ export default async function ConsultationsPage() {
     "use server";
     const id = formData.get("id") as string;
     await updateConsultationStatus(id, "completed");
-    revalidatePath("/doctor/consultations");
+    revalidatePath("/specialist/consultations");
   }
 
   return (

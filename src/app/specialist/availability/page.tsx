@@ -56,7 +56,7 @@ export default async function AvailabilityPage() {
       }
     }
     
-    revalidatePath("/doctor/availability");
+    revalidatePath("/specialist/availability");
   }
 
   const existing = Object.fromEntries(

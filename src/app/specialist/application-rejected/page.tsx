@@ -1,0 +1,76 @@
+// src/app/specialist/application-rejected/page.tsx
+import { getExpertByUserId } from "@/lib/db/queries";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { AlertOctagon, ArrowRight, UserCog } from "lucide-react";
+
+export default async function ApplicationRejectedPage() {
+  const token = (await cookies()).get("auth-token")?.value;
+  let userId = '';
+  
+  if (token) {
+    const payloadStr = token.replace("mock-jwt-", "").replace("mock-token-", "");
+    try {
+      if (token.startsWith("mock-jwt-")) {
+        const decoded = JSON.parse(Buffer.from(payloadStr, "base64").toString("utf-8"));
+        userId = decoded.id;
+      } else {
+        userId = payloadStr;
+      }
+    } catch (e) {
+      userId = payloadStr;
+    }
+  }
+
+  if (!userId) redirect("/login");
+
+  const doctor = await getExpertByUserId(userId);
+  if (!doctor) redirect("/login");
+
+  // If status is not rejected, redirect to dashboard
+  if (doctor.profile_status !== 'rejected') {
+    redirect("/specialist/dashboard");
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 font-sans">
+      <div className="max-w-md w-full bg-white border border-slate-200 rounded-2xl p-8 shadow-md text-center space-y-6 animate-in fade-in duration-300">
+        
+        <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto border border-red-100 shadow-sm">
+          <AlertOctagon size={32} />
+        </div>
+
+        <div className="space-y-2">
+          <h1 className="text-2xl font-bold text-slate-900">Application Rejected</h1>
+          <p className="text-slate-500 text-sm">
+            Unfortunately, your application to join Elira Health as a specialist has been rejected by our administration team.
+          </p>
+        </div>
+
+        {/* Rejection Reason Card */}
+        <div className="bg-red-50/50 border border-red-100 rounded-xl p-5 text-left space-y-2">
+          <label className="text-xs font-bold text-red-700 uppercase tracking-wider">Reason for rejection:</label>
+          <p className="text-slate-800 text-sm font-medium italic">
+            "{doctor.rejection_reason || "No specific reason provided. Please contact support."}"
+          </p>
+        </div>
+
+        <p className="text-slate-500 text-xs">
+          You may review and update your clinical credentials to resubmit your application for verification.
+        </p>
+
+        {/* Action Button */}
+        <div className="pt-2">
+          <a
+            href="/specialist/profile/complete"
+            className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-bold rounded-xl shadow-md transition-colors cursor-pointer text-sm"
+          >
+            <UserCog size={18} />
+            Update Profile & Resubmit
+            <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}

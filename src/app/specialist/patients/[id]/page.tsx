@@ -32,7 +32,7 @@ export default async function PatientDetailsPage({
     return (
       <div className="p-12 text-center border rounded-xl bg-gray-50 border-dashed">
         <p className="text-gray-500">Patient not found or you don't have access.</p>
-        <Link href="/doctor/patients" className="text-purple-600 hover:underline mt-4 inline-block">Back to Patients</Link>
+        <Link href="/specialist/patients" className="text-purple-600 hover:underline mt-4 inline-block">Back to Patients</Link>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default async function PatientDetailsPage({
   return (
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center gap-4">
-        <Link href="/doctor/patients" className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
+        <Link href="/specialist/patients" className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
           <ArrowLeft size={20} />
         </Link>
         <h1 className="text-2xl font-bold tracking-tight">Patient Profile</h1>
@@ -129,7 +129,7 @@ export default async function PatientDetailsPage({
                 Medical Records
               </h3>
               <Link 
-                href={`/doctor/medical-records?new=${patientId}`}
+                href={`/specialist/medical-records?new=${patientId}`}
                 className="text-xs font-medium text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-md transition-colors"
               >
                 + New Record
@@ -146,7 +146,7 @@ export default async function PatientDetailsPage({
                         <p className="font-medium text-sm">{record.diagnosis}</p>
                         <p className="text-xs text-gray-500">{new Date(record.created_at).toLocaleDateString()}</p>
                       </div>
-                      <Link href={`/doctor/medical-records?id=${record.id}`} className="text-xs text-purple-600 hover:underline">
+                      <Link href={`/specialist/medical-records?id=${record.id}`} className="text-xs text-purple-600 hover:underline">
                         View Full Record
                       </Link>
                     </div>

@@ -35,7 +35,7 @@ export default async function PatientsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {patients.map((patient) => (
-            <Link key={patient.id} href={`/doctor/patients/${patient.id}`}>
+            <Link key={patient.id} href={`/specialist/patients/${patient.id}`}>
               <div className="rounded-xl border bg-card p-5 hover:shadow-md transition-all cursor-pointer h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700">
