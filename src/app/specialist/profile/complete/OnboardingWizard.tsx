@@ -79,9 +79,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
   const [subSpecialties, setSubSpecialties] = useState<string[]>(initialSubSpecialties);
   const [languages, setLanguages] = useState<string[]>(initialLanguages);
   const [hospitalName, setHospitalName] = useState(doctor.hospital_name || "");
-  const [practicingCertificateUrl, setPracticingCertificateUrl] = useState(doctor.practicing_certificate_url || "");
   const [yearsExperience, setYearsExperience] = useState<number>(doctor.years_of_experience || 0);
-  const [hourlyRate, setHourlyRate] = useState<number>(doctor.hourly_rate || 0);
   const [bio, setBio] = useState(doctor.bio || "");
 
   // Step validation
@@ -114,16 +112,8 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
         setError("Hospital / Clinic name is required.");
         return false;
       }
-      if (!practicingCertificateUrl.trim() || !practicingCertificateUrl.startsWith("http")) {
-        setError("Please enter a valid Practicing Certificate URL (must start with http/https).");
-        return false;
-      }
       if (yearsExperience < 0) {
         setError("Years of experience must be 0 or greater.");
-        return false;
-      }
-      if (hourlyRate <= 0) {
-        setError("Hourly rate must be a positive number.");
         return false;
       }
     }
@@ -181,8 +171,6 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
       languages,
       hospitalName,
       yearsExperience,
-      hourlyRate,
-      practicingCertificateUrl,
       bio: bio || undefined,
     };
 
@@ -206,7 +194,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
       {/* Header */}
       <header className="bg-slate-900 text-white py-4 px-6 md:px-8 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-bold text-lg">
-          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-1.5 rounded-lg shadow-lg">
+          <div className="bg-gradient-to-br from-brand to-brand-blue text-white p-1.5 rounded-lg shadow-lg">
             <Stethoscope size={20} />
           </div>
           Elira Specialist Onboarding
@@ -228,7 +216,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
         {/* Progress Tracker Banner */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-purple-100 text-purple-600 rounded-xl">
+            <div className="p-3 bg-brand/10 text-brand rounded-xl">
               <Stethoscope size={32} />
             </div>
             <div>
@@ -249,18 +237,18 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs border transition-all ${
                     i === step
-                      ? "bg-purple-600 border-purple-600 text-white shadow-md shadow-purple-200"
+                      ? "bg-brand border-brand text-white shadow-md shadow-brand/20"
                       : i < step
-                      ? "bg-purple-100 border-purple-200 text-purple-600"
+                      ? "bg-brand/10 border-brand/20 text-brand"
                       : "bg-white border-slate-200 text-slate-400"
                   }`}
                 >
-                  {i < step ? <CheckCircle2 size={14} className="text-purple-600" /> : i}
+                  {i < step ? <CheckCircle2 size={14} className="text-brand" /> : i}
                 </div>
                 {i < 4 && (
                   <div
                     className={`h-0.5 w-6 transition-all ${
-                      i < step ? "bg-purple-500" : "bg-slate-200"
+                      i < step ? "bg-brand" : "bg-slate-200"
                     }`}
                   />
                 )}
@@ -283,7 +271,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
           {step === 1 && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
-                <User size={18} className="text-purple-600" />
+                <User size={18} className="text-brand" />
                 1. Clinical Identity
               </h2>
               
@@ -295,7 +283,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                     required
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm"
                     placeholder="Dr. Jane Smith"
                   />
                 </div>
@@ -306,7 +294,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                     required
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm"
                     placeholder="+254712345678"
                   />
                 </div>
@@ -316,7 +304,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                     type="url"
                     value={profilePhoto}
                     onChange={(e) => setProfilePhoto(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm"
                     placeholder="https://example.com/photo.jpg"
                   />
                 </div>
@@ -328,7 +316,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
           {step === 2 && (
             <div className="space-y-8 animate-in fade-in duration-300">
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
-                <Award size={18} className="text-purple-600" />
+                <Award size={18} className="text-brand" />
                 2. Professional Expertise & Languages
               </h2>
               
@@ -343,7 +331,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                         key={specialty}
                         className={`flex items-center gap-2 px-4 py-2.5 border rounded-xl hover:bg-slate-50 cursor-pointer text-xs font-semibold transition-all ${
                           isChecked 
-                            ? "border-purple-600 bg-purple-50/40 text-purple-700 font-semibold"
+                            ? "border-brand bg-brand/10 text-brand font-semibold"
                             : "border-slate-200 text-slate-700 bg-white"
                         }`}
                       >
@@ -351,7 +339,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => handleSpecialtyToggle(specialty)}
-                          className="accent-purple-600 rounded cursor-pointer w-4 h-4"
+                          className="accent-brand rounded cursor-pointer w-4 h-4"
                         />
                         {specialty}
                       </label>
@@ -371,7 +359,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                         key={subSpec}
                         className={`flex items-center gap-2 px-4 py-2.5 border rounded-xl hover:bg-slate-50 cursor-pointer text-xs font-semibold transition-all ${
                           isChecked 
-                            ? "border-purple-600 bg-purple-50/40 text-purple-700 font-semibold"
+                            ? "border-brand bg-brand/10 text-brand font-semibold"
                             : "border-slate-200 text-slate-700 bg-white"
                         }`}
                       >
@@ -379,7 +367,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => handleSubSpecialtyToggle(subSpec)}
-                          className="accent-purple-600 rounded cursor-pointer w-4 h-4"
+                          className="accent-brand rounded cursor-pointer w-4 h-4"
                         />
                         {subSpec}
                       </label>
@@ -399,7 +387,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                         key={lang}
                         className={`flex items-center gap-2 px-4 py-2.5 border rounded-xl hover:bg-slate-50 cursor-pointer text-xs font-semibold transition-all ${
                           isChecked 
-                            ? "border-purple-600 bg-purple-50/40 text-purple-700 font-semibold"
+                            ? "border-brand bg-brand/10 text-brand font-semibold"
                             : "border-slate-200 text-slate-700 bg-white"
                         }`}
                       >
@@ -407,7 +395,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => handleLanguageToggle(lang)}
-                          className="accent-purple-600 rounded cursor-pointer w-4 h-4"
+                          className="accent-brand rounded cursor-pointer w-4 h-4"
                         />
                         {lang}
                       </label>
@@ -422,34 +410,23 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
           {step === 3 && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
-                <Briefcase size={18} className="text-purple-600" />
+                <Briefcase size={18} className="text-brand" />
                 3. Clinical Practice & Pricing
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 md:col-span-2">
                   <label className="text-sm font-semibold text-slate-700">Hospital / Clinic</label>
                   <input
                     type="text"
                     required
                     value={hospitalName}
                     onChange={(e) => setHospitalName(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm"
                     placeholder="e.g. Nairobi Hospital"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700">Practicing Certificate URL</label>
-                  <input
-                    type="url"
-                    required
-                    value={practicingCertificateUrl}
-                    onChange={(e) => setPracticingCertificateUrl(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
-                    placeholder="https://example.com/certificate.pdf"
-                  />
-                </div>
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 md:col-span-2">
                   <label className="text-sm font-semibold text-slate-700">Years of Experience</label>
                   <input
                     type="number"
@@ -457,20 +434,8 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                     min="0"
                     value={yearsExperience === 0 ? "" : yearsExperience}
                     onChange={(e) => setYearsExperience(Number(e.target.value))}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm"
                     placeholder="e.g. 8"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-semibold text-slate-700">Hourly Rate (KES)</label>
-                  <input
-                    type="number"
-                    required
-                    min="0"
-                    value={hourlyRate === 0 ? "" : hourlyRate}
-                    onChange={(e) => setHourlyRate(Number(e.target.value))}
-                    className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm"
-                    placeholder="e.g. 3000"
                   />
                 </div>
               </div>
@@ -481,7 +446,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
           {step === 4 && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
-                <FileText size={18} className="text-purple-600" />
+                <FileText size={18} className="text-brand" />
                 4. Biography & Application Review
               </h2>
               
@@ -491,7 +456,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                   rows={3}
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all text-sm resize-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-xl shadow-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-blue/10 transition-all text-sm resize-none"
                   placeholder="Tell us about your medical background..."
                 />
               </div>
@@ -529,10 +494,6 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
                     <span className="text-slate-400 block font-medium">Experience</span>
                     <span className="text-slate-800 font-semibold">{yearsExperience} Years</span>
                   </div>
-                  <div>
-                    <span className="text-slate-400 block font-medium">Hourly Rate</span>
-                    <span className="text-slate-800 font-semibold">{hourlyRate} KES</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -558,7 +519,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
               <button
                 type="button"
                 onClick={handleNext}
-                className="flex items-center gap-1.5 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition-colors shadow-sm cursor-pointer"
+                className="flex items-center gap-1.5 px-5 py-2.5 bg-brand hover:bg-brand-deep text-white font-semibold rounded-xl text-sm transition-colors shadow-sm cursor-pointer"
               >
                 Next
                 <ArrowRight size={16} />
@@ -567,7 +528,7 @@ export default function OnboardingWizard({ doctor }: OnboardingWizardProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center justify-center gap-1.5 px-6 py-2.5 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-xl text-sm transition-all shadow-sm cursor-pointer min-w-[140px]"
+                className="flex items-center justify-center gap-1.5 px-6 py-2.5 bg-brand hover:bg-brand-deep disabled:bg-brand/50 text-white font-semibold rounded-xl text-sm transition-all shadow-sm cursor-pointer min-w-[140px]"
               >
                 {loading ? (
                   <span className="border-2 border-white border-t-transparent w-4 h-4 rounded-full animate-spin" />

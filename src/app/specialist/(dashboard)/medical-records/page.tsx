@@ -75,7 +75,7 @@ export default async function MedicalRecordsPage({
                 type="text" 
                 name="diagnosis" 
                 required 
-                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white"
+                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand focus:bg-white"
                 placeholder="e.g. Hypertension, Routine Checkup"
               />
             </div>
@@ -85,7 +85,7 @@ export default async function MedicalRecordsPage({
               <textarea 
                 name="treatment_plan" 
                 rows={3} 
-                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white"
+                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand focus:bg-white"
                 placeholder="Details of the treatment..."
               />
             </div>
@@ -95,7 +95,7 @@ export default async function MedicalRecordsPage({
               <textarea 
                 name="prescription" 
                 rows={2} 
-                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white"
+                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand focus:bg-white"
                 placeholder="Medication names and dosages..."
               />
             </div>
@@ -105,7 +105,7 @@ export default async function MedicalRecordsPage({
               <textarea 
                 name="notes" 
                 rows={2} 
-                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white"
+                className="w-full rounded-md border bg-gray-50 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand focus:bg-white"
               />
             </div>
 
@@ -113,7 +113,7 @@ export default async function MedicalRecordsPage({
               <a href="/specialist/medical-records" className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
                 Cancel
               </a>
-              <button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 text-sm font-medium rounded-md transition-colors">
+              <button type="submit" className="bg-brand hover:bg-brand-deep text-white px-4 py-2 text-sm font-medium rounded-md transition-colors">
                 Save Record
               </button>
             </div>
@@ -132,7 +132,7 @@ export default async function MedicalRecordsPage({
               <div key={record.id} className="p-5 hover:bg-gray-50 transition-colors">
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex items-center gap-2">
-                    <FileText size={18} className="text-purple-600" />
+                    <FileText size={18} className="text-brand" />
                     <h3 className="font-medium text-gray-900">{record.diagnosis}</h3>
                   </div>
                   <span className="text-xs text-gray-500">{new Date(record.created_at).toLocaleDateString()}</span>

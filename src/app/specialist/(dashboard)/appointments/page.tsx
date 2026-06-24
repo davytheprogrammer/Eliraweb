@@ -8,7 +8,7 @@ import { Calendar, CheckCircle, Clock, XCircle, UserX, AlertCircle } from "lucid
 const STATUS_ICONS: Record<string, any> = {
   PENDING: <Clock size={14} className="text-yellow-600" />,
   CONFIRMED: <CheckCircle size={14} className="text-blue-600" />,
-  COMPLETED: <CheckCircle size={14} className="text-green-600" />,
+  COMPLETED: <CheckCircle size={14} className="text-brand" />,
   CANCELLED: <XCircle size={14} className="text-red-600" />,
   NO_SHOW: <UserX size={14} className="text-gray-600" />,
   RESCHEDULED: <AlertCircle size={14} className="text-orange-600" />,
@@ -17,7 +17,7 @@ const STATUS_ICONS: Record<string, any> = {
 const STATUS_STYLES: Record<string, string> = {
   PENDING: "bg-yellow-50 text-yellow-700 border-yellow-200",
   CONFIRMED: "bg-blue-50 text-blue-700 border-blue-200",
-  COMPLETED: "bg-green-50 text-green-700 border-green-200",
+  COMPLETED: "bg-brand/10 text-brand border-brand/20",
   CANCELLED: "bg-red-50 text-red-700 border-red-200",
   NO_SHOW: "bg-gray-50 text-gray-700 border-gray-200",
   RESCHEDULED: "bg-orange-50 text-orange-700 border-orange-200",
@@ -61,7 +61,7 @@ export default async function DoctorAppointmentsPage() {
       <div className="flex justify-between items-end bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
-            <Calendar className="text-emerald-600" />
+            <Calendar className="text-brand" />
             My Appointments
           </h1>
           <p className="text-slate-500 mt-1">Manage your upcoming and past patient appointments.</p>
@@ -139,7 +139,7 @@ export default async function DoctorAppointmentsPage() {
                       <form action={handleAction}>
                         <input type="hidden" name="id" value={appt.id} />
                         <input type="hidden" name="actionType" value="complete" />
-                        <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
+                        <button type="submit" className="bg-brand hover:bg-brand-deep text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
                           Mark Completed
                         </button>
                       </form>

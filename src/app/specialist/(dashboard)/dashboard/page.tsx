@@ -56,7 +56,7 @@ export default async function DoctorDashboard() {
       label: "Today's Schedule", 
       value: appointmentMetrics.todayAppointments, 
       icon: Clock,
-      bg: "bg-emerald-50 text-emerald-600 border-emerald-100",
+      bg: "bg-brand-light/40 text-brand border-brand/15",
       link: "/specialist/appointments",
       isLocked: profileStatus !== 'approved'
     },
@@ -64,7 +64,7 @@ export default async function DoctorDashboard() {
       label: "Upcoming Appointments", 
       value: appointmentMetrics.upcomingAppointments, 
       icon: CalendarCheck,
-      bg: "bg-blue-50 text-blue-600 border-blue-100",
+      bg: "bg-blue-50/50 text-blue-600 border-blue-100",
       link: "/specialist/appointments",
       isLocked: profileStatus !== 'approved'
     },
@@ -72,7 +72,7 @@ export default async function DoctorDashboard() {
       label: "Total Patients", 
       value: stats.totalAssignedPatients, 
       icon: Users,
-      bg: "bg-purple-50 text-purple-600 border-purple-100",
+      bg: "bg-brand-light/40 text-brand-pink border-brand-pink/15",
       link: "/specialist/patients",
       isLocked: profileStatus !== 'approved'
     },
@@ -80,7 +80,7 @@ export default async function DoctorDashboard() {
       label: "Medical Records", 
       value: stats.totalMedicalRecords, 
       icon: FileText,
-      bg: "bg-amber-50 text-amber-600 border-amber-100",
+      bg: "bg-brand-light/40 text-brand-blue border-brand-blue/15",
       link: "/specialist/medical-records",
       isLocked: profileStatus !== 'approved'
     },
@@ -104,8 +104,8 @@ export default async function DoctorDashboard() {
         );
       case 'approved':
         return (
-          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand"></span>
             🟢 Approved
           </span>
         );
@@ -143,19 +143,19 @@ export default async function DoctorDashboard() {
       
       {/* Onboarding State Banners */}
       {profileStatus === 'profile_incomplete' && (
-        <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-8 text-white shadow-md relative overflow-hidden">
+        <div className="bg-gradient-to-r from-brand to-brand-deep rounded-2xl p-8 text-white shadow-md relative overflow-hidden">
           <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
             <Sparkles size={200} />
           </div>
           <div className="max-w-xl space-y-4">
             <h2 className="text-2xl font-bold">Complete Your Professional Profile</h2>
-            <p className="text-purple-100 font-medium">
+            <p className="text-brand-light/80 font-medium">
               Your account has been created successfully. Before you can accept patients and appointments,
               you must complete your professional credentials.
             </p>
             <a 
               href="/specialist/profile/complete" 
-              className="inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-purple-50 text-purple-700 font-bold rounded-xl shadow-lg transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-brand-light text-brand-deep font-bold rounded-xl shadow-lg transition-colors cursor-pointer"
             >
               Complete Profile
             </a>
@@ -184,7 +184,7 @@ export default async function DoctorDashboard() {
           <Stethoscope size={160} className="-mr-10 -mt-10" />
         </div>
         <div className="relative z-10 flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-2xl font-bold border-2 border-white shadow-md">
+          <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center text-brand text-2xl font-bold border-2 border-white shadow-md">
             {doctor.display_name?.charAt(0) || '?'}
           </div>
           <div>
@@ -197,7 +197,7 @@ export default async function DoctorDashboard() {
         </div>
         {profileStatus === 'approved' && (
           <div className="relative z-10 flex gap-3">
-            <a href="/specialist/medical-records?new=select" className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors shadow-sm inline-block">
+            <a href="/specialist/medical-records?new=select" className="px-4 py-2 bg-brand hover:bg-brand-deep text-white rounded-xl text-sm font-medium transition-colors shadow-sm inline-block">
               + New Record
             </a>
             <a href="/specialist/availability" className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-medium transition-colors shadow-sm inline-block">
@@ -214,7 +214,7 @@ export default async function DoctorDashboard() {
             <div className={`relative rounded-2xl bg-white p-6 shadow-sm border border-slate-200 transition-all duration-300 ${
               isLocked 
                 ? 'opacity-70 bg-slate-50/50' 
-                : 'hover:shadow-lg hover:border-emerald-200'
+                : 'hover:shadow-lg hover:border-brand/30'
             }`}>
               {isLocked && (
                 <div className="absolute top-3 right-3 text-slate-400" title="Requires profile verification">
@@ -251,11 +251,11 @@ export default async function DoctorDashboard() {
         <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <CalendarCheck className="text-blue-500" />
+              <CalendarCheck className="text-brand-blue" />
               Clinical Summary
             </h2>
             {profileStatus === 'approved' && (
-              <a href="/specialist/appointments" className="text-sm text-emerald-600 font-medium hover:underline">View Schedule</a>
+              <a href="/specialist/appointments" className="text-sm text-brand font-medium hover:underline">View Schedule</a>
             )}
           </div>
           

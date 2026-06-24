@@ -32,7 +32,7 @@ export default async function PatientDetailsPage({
     return (
       <div className="p-12 text-center border rounded-xl bg-gray-50 border-dashed">
         <p className="text-gray-500">Patient not found or you don't have access.</p>
-        <Link href="/specialist/patients" className="text-purple-600 hover:underline mt-4 inline-block">Back to Patients</Link>
+        <Link href="/specialist/patients" className="text-brand hover:underline mt-4 inline-block">Back to Patients</Link>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default async function PatientDetailsPage({
         {/* Patient Details Card */}
         <div className="md:col-span-1 space-y-6">
           <div className="rounded-xl border bg-card p-5">
-            <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 text-xl font-bold mb-4">
+            <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center text-brand text-xl font-bold mb-4">
               {patient.first_name?.charAt(0)}{patient.last_name?.charAt(0)}
             </div>
             <h2 className="text-xl font-semibold mb-1">{patient.first_name} {patient.last_name}</h2>
@@ -80,7 +80,7 @@ export default async function PatientDetailsPage({
               <div className="pt-2">
                 <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Assignment Status</p>
                 <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${
-                  assignment?.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                  assignment?.status === 'active' ? 'bg-brand/10 text-brand' : 'bg-gray-100 text-gray-700'
                 }`}>
                   {assignment?.status || 'Unknown'}
                 </span>
@@ -130,7 +130,7 @@ export default async function PatientDetailsPage({
               </h3>
               <Link 
                 href={`/specialist/medical-records?new=${patientId}`}
-                className="text-xs font-medium text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-md transition-colors"
+                className="text-xs font-medium text-brand hover:text-brand-deep bg-brand-light/40 hover:bg-brand-light/60 px-3 py-1.5 rounded-md transition-colors"
               >
                 + New Record
               </Link>
@@ -146,7 +146,7 @@ export default async function PatientDetailsPage({
                         <p className="font-medium text-sm">{record.diagnosis}</p>
                         <p className="text-xs text-gray-500">{new Date(record.created_at).toLocaleDateString()}</p>
                       </div>
-                      <Link href={`/specialist/medical-records?id=${record.id}`} className="text-xs text-purple-600 hover:underline">
+                      <Link href={`/specialist/medical-records?id=${record.id}`} className="text-xs text-brand hover:underline">
                         View Full Record
                       </Link>
                     </div>

@@ -32,5 +32,7 @@ export default async function CompleteProfilePage() {
     redirect("/specialist/dashboard");
   }
 
-  return <OnboardingWizard doctor={doctor} />;
+  const plainDoctor = JSON.parse(JSON.stringify(doctor));
+
+  return <OnboardingWizard doctor={plainDoctor} />;
 }

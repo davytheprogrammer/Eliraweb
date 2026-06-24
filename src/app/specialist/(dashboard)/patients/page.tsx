@@ -38,7 +38,7 @@ export default async function PatientsPage() {
             <Link key={patient.id} href={`/specialist/patients/${patient.id}`}>
               <div className="rounded-xl border bg-card p-5 hover:shadow-md transition-all cursor-pointer h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700">
+                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center text-brand">
                     <UserCircle size={24} />
                   </div>
                   <div>
@@ -55,7 +55,7 @@ export default async function PatientsPage() {
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Status:</span>
                     <span className={`font-medium px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider ${
-                      patient.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                      patient.status === 'active' ? 'bg-brand/10 text-brand' : 'bg-gray-100 text-gray-700'
                     }`}>
                       {patient.status}
                     </span>

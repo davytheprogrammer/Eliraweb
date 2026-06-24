@@ -64,7 +64,7 @@ export default async function ApplicationRejectedPage() {
         <div className="pt-2 flex flex-col gap-2">
           <a
             href="/specialist/profile/complete"
-            className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-bold rounded-xl shadow-md transition-colors cursor-pointer text-sm"
+            className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-brand hover:bg-brand-deep active:bg-brand-deep text-white font-bold rounded-xl shadow-md transition-colors cursor-pointer text-sm"
           >
             <UserCog size={18} />
             Update Profile & Resubmit

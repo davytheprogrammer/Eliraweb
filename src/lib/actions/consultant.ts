@@ -26,8 +26,6 @@ const completeProfileSchema = z.object({
   hospitalName: z.string().min(3, "Hospital or Clinic name is required"),
   yearsExperience: z.number().min(0, "Years of experience must be 0 or more"),
   bio: z.string().optional(),
-  hourlyRate: z.number().min(0, "Hourly rate must be positive"),
-  practicingCertificateUrl: z.string().url("Practicing certificate must be a valid URL"),
 });
 
 export async function bookConsultation(data: Partial<Consultation>) {
@@ -68,8 +66,6 @@ export async function completeSpecialistOnboarding(data: {
   languages: string[];
   hospitalName: string;
   yearsExperience: number;
-  hourlyRate: number;
-  practicingCertificateUrl: string;
   bio?: string;
 }) {
   const token = (await cookies()).get("auth-token")?.value;
@@ -118,8 +114,8 @@ export async function completeSpecialistOnboarding(data: {
     languages: JSON.stringify(data.languages),
     hospital_name: data.hospitalName,
     years_of_experience: data.yearsExperience,
-    hourly_rate: data.hourlyRate,
-    practicing_certificate_url: data.practicingCertificateUrl,
+    hourly_rate: 0,
+    practicing_certificate_url: null,
     bio: data.bio || null,
     avatar_url: data.profilePhoto || null,
     profile_status: 'pending_review',
